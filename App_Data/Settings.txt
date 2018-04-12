@@ -1,0 +1,2 @@
+DataProvider: sqlserver
+DataConnectionString: Data Source=184.168.47.21;Initial Catalog=snowschool167_;Integrated Security=False;Persist Security Info=False;User ID=ss167;Password=Muau5!97

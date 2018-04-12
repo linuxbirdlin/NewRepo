@@ -1,0 +1,90 @@
+﻿@model TopicModel
+@using Nop.Web.Models.Topics;
+
+
+@{ 
+    var title = "一路驰滑雪学校";
+    var body = "一路驰滑雪学校是加拿大联邦注册的有限公司，总部设于加拿大多伦多， 是目前为止加拿大唯一一所正规的华人滑雪学校。 学校致力于普及滑雪运动， 提高大众滑雪水平， 在华人社区有着极高的口碑。众所周知， 滑雪是加拿大冬季非常热门的一项体育活动，能在雪上自由驰骋是很多人的梦想。滑雪不但能增强体质，而且它能让您的冬季变得美丽而又短暂。一路驰滑雪学校2017／2018雪季继续推出各类滑雪课程，由持牌滑雪教练执教，寓教于乐，耐心细致的教学让您在安全快乐的氛围下掌握滑雪技术，体验滑雪乐趣。";
+}
+
+@if (Model.IsPasswordProtected)
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#button-password-@Model.Id').click(function() {
+                var postData = {
+                    id: $("#@Html.FieldIdFor(model => model.Id)").val(),
+                    password: $('#password-@Model.Id').val()
+                };
+                addAntiForgeryToken(postData);
+
+                $.ajax({
+                    cache: false,
+                    type: 'POST',
+                    url: '@Url.RouteUrl("TopicAuthenticate")',
+                    data: postData,
+                    dataType: 'json',
+                    success: function(data) {
+                        if (data.Authenticated) {
+                            $('#ph-topic-@Model.Id #ph-title-@Model.Id h2').html(data.Title);
+                            if ($('#ph-topic-@Model.Id #ph-title-@Model.Id h2').text().length == 0) {
+                                $('#ph-title-@Model.Id').hide();
+                            }
+                            $('#ph-topic-@Model.Id .topic-block-body').html(data.Body);
+                            $('#ph-password-@Model.Id').hide();
+                            $('#ph-topic-@Model.Id').show();
+                            //we need to re-run the validation plugin after the content is loaded after successful authentication
+                            $.validator.unobtrusive.parse('#ph-topic-@Model.Id');
+                        } else {
+                            $('#password-error-@Model.Id').text(data.Error).fadeIn("slow");
+                            $('#ph-password-@Model.Id #password-@Model.Id').select().focus();
+                        }
+                    }
+                });
+                return false;
+            });
+        });
+
+        $(document).ready(function() {
+            $('#ph-topic-@Model.Id').hide();
+            $('#ph-password-@Model.Id #password-@Model.Id').select().focus();
+        });
+    </script>
+    <div class="topic-password" id="ph-password-@Model.Id">
+        @using (Html.BeginRouteForm("TopicAuthenticate"))
+        {
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(model => model.Id)
+            <div class="enter-password-title">
+                @T("Topic.EnterPassword")
+            </div>
+            <div class="enter-password-form">
+                @Html.Password("password", null, new { id = "password-" + @Model.Id })
+                <input type="submit" id="button-password-@Model.Id" value="@T("Topic.Button")" class="button-1 topic-password-button" />
+            </div>
+            <div class="password-error" id="password-error-@Model.Id" style="display: none;"></div>
+        }
+    </div>
+    <div class="topic-block" id="ph-topic-@Model.Id">
+        <div class="topic-block-title" id="ph-title-@Model.Id">
+            <h2>@T(@title)</h2>
+        </div>
+        <div class="topic-block-body">
+            <p>@T(@body)</p>
+        </div>
+    </div>
+}
+else
+{
+    <div class="topic-block">
+        @if (!String.IsNullOrEmpty(Model.Title))
+        {
+            <div class="topic-block-title">
+                <h2>@T(@title)</h2>
+            </div>
+        }
+        <div class="topic-block-body">
+           <p>@T(@body)</p>
+        </div>
+    </div>
+}

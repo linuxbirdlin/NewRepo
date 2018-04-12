@@ -1,0 +1,121 @@
+﻿@model IList<ProductOverviewModel>
+@{
+    //Layout = "~/Views/Shared/_ColumnsTwo.cshtml";
+
+    //title
+    Html.AddTitleParts(T("教学价格").Text);
+    //page class
+    Html.AppendPageCssClassParts("html-recently-added-products-page");
+}
+@using Nop.Web.Models.Catalog;
+
+<div class="class-info-group center-1">
+    @*<div class="side-2"><img src="~/Content/Images/images_group/group21.jpg" style="width:90%; height:auto;" /></div>*@
+    <div class="page recently-added-products-page center-2">
+        <div class="page-title">
+            @*<a href="@Url.RouteUrl("NewProductsRSS")" class="link-rss" title="@T("Products.NewProducts.RSS.Hint")">@T("Products.NewProducts.RSS")</a>*@
+            <h1>@T("团体滑雪课程")</h1>
+        </div>
+        <div class="page-body">
+            @*@if (Model.Count > 0)
+                {
+                    <div class="product-grid">
+                        <div class="item-grid">
+                            @foreach (var product in Model)
+                            {
+                                <div class="item-box">
+                                    @Html.Partial("_ProductBox", product)
+                                </div>
+                            }
+                        </div>
+                    </div>
+                }*@
+            <div class="class-info">
+                <p>@T("我们的团体滑雪课程按年龄分成青少年班和成人班，同时还分单板班和双板班。每期课程为时四周，都在周日上课， 每周一天，授课三小时，上下午各1.5小时。结业后，提供学生进展汇报卡和雪上照片。同一名学员如果一次性报两期课程，课程费用将得到一定优惠。学校还可以提供正式收据用以报税。现在报名，享受early bird价格。")</p><br />
+                <p>教学地点：月亮石滑雪场（Mt. St. Louis Moonstone Ski Resort), 雪场位于多伦多北边的Barrie地区，距离多伦多约一个小时的车程，地址：24 Mount St. Louis Road, R.R.4 Coldwater, ON, L0K 1E0。</p><br />
+                <p>@T("2018年第一期：1月7日，1月14日，1月21日，1月28日 10:30am ~ 3:00pm") <br> @T("2018年第二期：2月4日，2月11日，2月18日，2月25日 10:30am ~ 3:00pm")</p><br />
+            </div>
+            <table class="price-table">
+                <tbody>
+                    <tr class="price-header">
+                        <td><strong>项目</strong></td>
+                        <td><strong>青少年班（6-17)</strong></td>
+                        <td><strong>成人班（18+）(初级）</strong></td>
+                    </tr>
+                    <tr class="price-content">
+                        <td>课程费用(每期）(earlybird)</td>
+                        <td>$340</td>
+                        <td>$340</td>
+                    </tr>
+                    <tr class="price-content">
+                        <td>缆车费用（每期）</td>
+                        <td>$176</td>
+                        <td>$216</td>
+                    </tr>
+                    <tr class="price-content">
+                        <td>课程费用(全两期）</td>
+                        <td>$624&nbsp;</td>
+                        <td>N/A&nbsp;</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="ps-info">
+                <p>@T("* 注1：缆车费用为可选费用，完全为了给大家提供方便，报名时可以根据自己的需要选择相应的服务,有snow pass的学员如需购买额外天数的缆车票，请在在线付款页面选择需要购买的单天青少年缆车票。")</p><br />
+                <p>@T("* 注2：以上价格均为税前价格，支付时会加上HST。课程结束后我们会统一 发出用于报税的收据。")</p><br />
+                <p>@T("* 注3：由于名额有限，我们将以付款的先后次序录取报名的学员。现在报名享受早鸟价格。")</p><br />
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="class-info-private center-1">
+    <div class="side-2"><img src="~/Content/Images/images_private/private4.jpg" style="width:90%; height:auto;" /></div>
+    <div class="page recently-added-products-page center-2">
+
+        <div class="page-title">
+            <h1>@T("私人教练课程")</h1>
+        </div>
+
+        <div class="page-body">
+            <div class="class-info">
+                <p>@T("我们提供私人教练滑雪课程，以满足学员对时间，场地以及学习步调的特殊要求。课程可以选择单板或双板，教学比例上可以选择一对一，一对二或一对三。教学地 点由学员自己选择。教学时间由学员和教练协调。一对二和一对三的课程要求学员年龄相仿，水平相近。学员自行解决交通，雪票（缆车费）和滑雪装备。选择我们 学校基地雪场：月亮石滑雪场（Mt. St. Louis Moonstone Ski Resort)以及蓝山滑雪场（Blue Mountain Resort)的学员将在价格上享有优惠，最少学时上也有更大自由度。")</p><br />
+            </div>
+        </div>
+
+        <table class="price-table">
+            <tbody>
+                <tr class="price-header">
+                    <td><strong>授课比例</strong></td>
+                    <td><strong>课程费用（每人每小时）</strong></td>
+                    <td><strong>每次课最少学时数</strong></td>
+                    <td><strong> 基地雪场优惠</strong></td>
+                </tr>
+                <tr class="price-content">
+                    <td>一对一</td>
+                    <td>$70</td>
+                    <td>3小时</td>
+                    <td>$60, 2小时起</td>
+                </tr>
+                <tr class="price-content">
+                    <td>一对二</td>
+                    <td>$45</td>
+                    <td>3小时</td>
+                    <td>$35, 2小时起</td>
+                </tr>
+                <tr class="price-content">
+                    <td>一对三</td>
+                    <td>$40</td>
+                    <td>3小时</td>
+                    <td>$35, 2小时起</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="ps-info">
+            <p>@T("* 注：以上价格均为税前价格，支付时会加上HST。")</p>
+        </div>
+    </div>
+</div>
+
